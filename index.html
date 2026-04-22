@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatima Majkoumeh | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
 
+    <!-- Header / Navigation -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight uppercase">Fatima Majkoumeh</h1>
+            <div class="space-x-6 text-sm font-medium uppercase tracking-wider">
+                <a href="#om" class="hover:text-orange-500 transition">Om mig</a>
+                <a href="gymnasiearbete.html" class="hover:text-orange-500 transition">Gymnasiearbete</a>
+                <a href="cv.html" class="hover:text-orange-500 transition">Mitt CV</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="om" class="hero-gradient text-white py-24 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-6 uppercase tracking-tighter">Fatima Majkoumeh</h2>
+            <div class="w-20 h-1 bg-orange-500 mx-auto mb-6"></div>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Studerar Försäljning och service på Praktiska Gymnasiet Malmö City. 
+                Välkommen till min digitala portfolio där jag presenterar mina meriter och mitt gymnasiearbete.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-20 space-y-32">
+
+        <!-- Focus / Specialties Section -->
+        <section class="grid md:grid-cols-3 gap-8">
+            <div class="border-t-2 border-black pt-6">
+                <h4 class="font-bold uppercase text-orange-500 text-xs mb-2">Inriktning</h4>
+                <h3 class="text-xl font-bold mb-3">Kundservice</h3>
+                <p class="text-gray-600 text-sm">Fokus på professionellt kundbemötande och att skapa långsiktiga kundrelationer.</p>
+            </div>
+            <div class="border-t-2 border-black pt-6">
+                <h4 class="font-bold uppercase text-orange-500 text-xs mb-2">Inriktning</h4>
+                <h3 class="text-xl font-bold mb-3">Försäljning</h3>
+                <p class="text-gray-600 text-sm">Utveckling av säljtekniker och förståelse för kundens behov i säljprocessen.</p>
+            </div>
+            <div class="border-t-2 border-black pt-6">
+                <h4 class="font-bold uppercase text-orange-500 text-xs mb-2">Inriktning</h4>
+                <h3 class="text-xl font-bold mb-3">Marknadsföring</h3>
+                <p class="text-gray-600 text-sm">Kunskaper om hur man kommunicerar varumärken och når ut till rätt målgrupp.</p>
+            </div>
+        </section>
+
+        <!-- Gymnasiearbete Section -->
+        <section id="gymnasiearbete" class="scroll-mt-20">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="text-orange-500 font-bold tracking-widest uppercase text-xs">Slutprojekt</span>
+                    <h3 class="text-4xl font-black mt-2 mb-6 uppercase">Gymnasiearbete</h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed italic border-l-4 border-orange-500 pl-4">
+                        Här hittar du detaljerad information om mitt gymnasiearbete inom Försäljning och service.
+                    </p>
+                    <a href="gymnasiearbete.html" class="inline-flex items-center px-8 py-3 bg-orange-500 text-white font-bold rounded-none hover:bg-orange-600 transition shadow-lg shadow-orange-100 uppercase tracking-wider">
+                        Visa arbete
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="bg-black aspect-video md:aspect-square flex items-center justify-center p-8">
+                        <div class="border border-gray-800 w-full h-full flex items-center justify-center">
+                            <span class="text-orange-500 font-bold uppercase tracking-widest opacity-50 text-center">Portfolio<br>2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CV Section -->
+        <section id="cv" class="scroll-mt-20 bg-black text-white p-12 md:p-20 text-center">
+            <h3 class="text-4xl font-black mb-6 uppercase">Mitt CV</h3>
+            <p class="text-gray-400 mb-10 max-w-xl mx-auto">
+                Läs mer om min utbildning på Praktiska Gymnasiet och min praktiska erfarenhet.
+            </p>
+            <a href="cv.html" class="inline-flex items-center px-10 py-4 border-2 border-orange-500 text-orange-500 font-black hover:bg-orange-500 hover:text-white transition group uppercase tracking-widest">
+                Öppna CV
+                <svg class="ml-3 w-5 h-5 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-16">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm tracking-widest uppercase">© Fatima Majkoumeh | Praktiska Malmö City</p>
+        </div>
+    </footer>
+
+</body>
+</html>
