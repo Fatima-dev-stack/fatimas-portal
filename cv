@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatima Alzhraa Majkoumeh - CV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 leading-relaxed">
+
+    <!-- Header / Kontaktinfo -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Fatima Alzhraa Majkoumeh</h1>
+                <p class="text-blue-600 font-medium">Studerande inom Försäljning & Service</p>
+            </div>
+            <div class="text-sm space-y-1 text-right md:text-right text-center">
+                <p class="flex items-center justify-center md:justify-end gap-2">
+                    <i class="fa-solid fa-location-dot text-slate-400"></i> Magistratsvägen 7 C, 226 43 Lund
+                </p>
+                <p class="flex items-center justify-center md:justify-end gap-2">
+                    <i class="fa-solid fa-phone text-slate-400"></i> 0790-56 20 62
+                </p>
+                <p class="flex items-center justify-center md:justify-end gap-2">
+                    <i class="fa-solid fa-envelope text-slate-400"></i> fmajkoumeh@gmail.com
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-12">
+        
+        <!-- Personligt Brev / Introduktion -->
+        <section>
+            <div class="bg-blue-50 rounded-2xl p-8 border border-blue-100">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-user text-blue-600"></i> Om mig
+                </h2>
+                <p class="text-slate-700">
+                    Jag är en 20-årig tjej som studerar tredje året på gymnasiet inom Försäljning och service-programmet på Praktiska Gymnasiet Malmö City. 
+                    Jag är praktiskt lagd och älskar försäljning och kundkontakt. Mitt mål med studierna är att ta ett butiksarbete med sikte på att så småningom bli butikschef med personalansvar.
+                </p>
+            </div>
+        </section>
+
+        <!-- Utbildning -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-blue-600"></i> Utbildning
+            </h2>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold">Försäljning och service</h3>
+                        <p class="text-slate-600">Praktiska Gymnasiet Malmö City</p>
+                    </div>
+                    <span class="bg-slate-100 px-3 py-1 rounded-full text-xs font-semibold">2023 - 2026</span>
+                </div>
+                
+                <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3">Lästa kurser</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                    <ul class="space-y-1 list-disc list-inside text-slate-700">
+                        <li>Näthandel</li>
+                        <li>Hållbar Utveckling</li>
+                        <li>Servicekunskap 1&2</li>
+                        <li>Personaladministration</li>
+                        <li>Affärsutveckling & ledarskap</li>
+                    </ul>
+                    <ul class="space-y-1 list-disc list-inside text-slate-700">
+                        <li>Personlig försäljning 1&2</li>
+                        <li>Ledarskap och organisation</li>
+                        <li>Praktiskt marknadsföring 1&2</li>
+                        <li>Entreprenörskap</li>
+                        <li>Handel specialisering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Erfarenhet / APL -->
+        <section>
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-briefcase text-blue-600"></i> Praktik & Arbete (APL)
+            </h2>
+            <div class="space-y-4">
+                
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold">Hemmakväll Lund City</h3>
+                        <p class="text-slate-600">APL vårtermin</p>
+                    </div>
+                    <span class="text-slate-500 font-medium">2026</span>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold">Kappahl Lund City</h3>
+                        <p class="text-slate-600">APL två terminer</p>
+                    </div>
+                    <span class="text-slate-500 font-medium">2025</span>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold">MQ Märket Nova Lund</h3>
+                        <p class="text-slate-600">APL hösttermin</p>
+                    </div>
+                    <span class="text-slate-500 font-medium">2024</span>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold">Pressbyrån Västra Station, Lund</h3>
+                        <p class="text-slate-600">APL 4 veckor</p>
+                    </div>
+                    <span class="text-slate-500 font-medium">2024</span>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold">Dalbybadet</h3>
+                        <p class="text-slate-600">Sommarjobb 4 veckor</p>
+                    </div>
+                    <span class="text-slate-500 font-medium">2023</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Språk & Referenser -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section>
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-language text-blue-600"></i> Språk
+                </h2>
+                <div class="bg-white rounded-xl p-6 border border-slate-200 space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium text-slate-700">Arabiska</span>
+                        <span class="text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">Modersmål</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium text-slate-700">Svenska</span>
+                        <span class="text-sm bg-green-100 text-green-700 px-2 py-0.5 rounded">Flytande</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium text-slate-700">Engelska</span>
+                        <span class="text-sm bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Konversationsnivå</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-address-book text-blue-600"></i> Referenser
+                </h2>
+                <div class="bg-white rounded-xl p-6 border border-slate-200 space-y-4">
+                    <div>
+                        <p class="font-bold text-slate-800">Sava Surla</p>
+                        <p class="text-xs text-slate-500 mb-1 uppercase">Yrkeslärare Handel</p>
+                        <p class="text-sm text-blue-600">0708-73 08 04</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100">
+                        <p class="font-bold text-slate-800">Per-Göran Nilsson</p>
+                        <p class="text-xs text-slate-500 mb-1 uppercase">Handledare Pressbyrån</p>
+                        <p class="text-sm text-blue-600">0735-66 41 35</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-12 text-slate-400 text-sm">
+        <p>&copy; 2024 Fatima Alzhraa Majkoumeh - Digitalt CV</p>
+    </footer>
+
+</body>
+</html>
