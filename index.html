@@ -6,104 +6,163 @@
     <title>Fatima Majkoumeh | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+        
+        :root {
+            --soft-beige: #F9F7F2;
+            --dusty-rose: #E8D5D0;
+            --deep-taupe: #4A4442;
+            --accent-gold: #D4AF37;
         }
-        .hero-gradient {
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--soft-beige);
+            color: var(--deep-taupe);
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-nav {
+            background: rgba(249, 247, 242, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card {
+            background: white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(232, 213, 208, 0.3);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(74, 68, 66, 0.05);
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
 
-    <!-- Header / Navigation -->
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight uppercase">Fatima Majkoumeh</h1>
-            <div class="space-x-6 text-sm font-medium uppercase tracking-wider">
-                <a href="#om" class="hover:text-orange-500 transition">Om mig</a>
-                <a href="gymnasiearbete.html" class="hover:text-orange-500 transition">Gymnasiearbete</a>
-                <a href="cv.html" class="hover:text-orange-500 transition">Mitt CV</a>
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-[#E8D5D0]/30">
+        <div class="max-w-6xl mx-auto px-8 py-5 flex justify-between items-center">
+            <span class="serif text-xl tracking-wide font-bold italic">Fatima M.</span>
+            <div class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-[#8A817C]">
+                <a href="#om" class="hover:text-[#4A4442] transition">Hem</a>
+                <a href="#spel" class="hover:text-[#4A4442] transition">Mina Spel</a>
+                <a href="#gymnasiearbete" class="hover:text-[#4A4442] transition">Gymnasiearbete</a>
+                <a href="cv.html" class="text-[#D4AF37] border-b border-[#D4AF37] hover:text-[#4A4442] transition">Mitt CV</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header id="om" class="hero-gradient text-white py-24 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl md:text-6xl font-extrabold mb-6 uppercase tracking-tighter">Fatima Majkoumeh</h2>
-            <div class="w-20 h-1 bg-orange-500 mx-auto mb-6"></div>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Studerar Försäljning och service på Praktiska Gymnasiet Malmö City. 
-                Välkommen till min digitala portfolio där jag presenterar mina meriter och mitt gymnasiearbete.
+    <header id="om" class="pt-32 pb-24 px-8">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <span class="text-[10px] font-bold tracking-[0.4em] uppercase text-[#A3918D] mb-6 block">Välkommen till min värld</span>
+            <h1 class="text-5xl md:text-8xl font-normal leading-tight mb-8 text-[#2D2928]">Fatima Majkoumeh</h1>
+            <div class="w-16 h-[1px] bg-[#D4AF37] mx-auto mb-10"></div>
+            <p class="text-lg md:text-xl text-[#6B6361] font-light leading-relaxed max-w-2xl mx-auto italic">
+                Studerande inom Försäljning & Service vid Praktiska Gymnasiet. 
+                Här förenas min passion för affärsmässighet med kreativ spelutveckling.
             </p>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-20 space-y-32">
+    <main class="max-w-6xl mx-auto px-8">
 
-        <!-- Focus / Specialties Section -->
-        <section class="grid md:grid-cols-3 gap-8">
-            <div class="border-t-2 border-black pt-6">
-                <h4 class="font-bold uppercase text-orange-500 text-xs mb-2">Inriktning</h4>
-                <h3 class="text-xl font-bold mb-3">Kundservice</h3>
-                <p class="text-gray-600 text-sm">Fokus på professionellt kundbemötande och att skapa långsiktiga kundrelationer.</p>
+        <!-- Mina Spel Section -->
+        <section id="spel" class="py-24 scroll-mt-20">
+            <div class="flex flex-col items-center mb-20 text-center">
+                <h2 class="text-4xl font-normal text-[#2D2928] mb-4">Mina Spel</h2>
+                <p class="text-sm text-[#A3918D] tracking-widest uppercase">Kreativitet & Logik</p>
             </div>
-            <div class="border-t-2 border-black pt-6">
-                <h4 class="font-bold uppercase text-orange-500 text-xs mb-2">Inriktning</h4>
-                <h3 class="text-xl font-bold mb-3">Försäljning</h3>
-                <p class="text-gray-600 text-sm">Utveckling av säljtekniker och förståelse för kundens behov i säljprocessen.</p>
-            </div>
-            <div class="border-t-2 border-black pt-6">
-                <h4 class="font-bold uppercase text-orange-500 text-xs mb-2">Inriktning</h4>
-                <h3 class="text-xl font-bold mb-3">Marknadsföring</h3>
-                <p class="text-gray-600 text-sm">Kunskaper om hur man kommunicerar varumärken och når ut till rätt målgrupp.</p>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Spel 1 -->
+                <div class="project-card p-10 rounded-sm group">
+                    <div class="bg-[#FDFCFB] aspect-[4/3] mb-10 overflow-hidden flex items-center justify-center border border-[#F4EFEA]">
+                         <span class="serif text-4xl text-[#E8D5D0] group-hover:scale-110 transition-transform duration-700">01</span>
+                    </div>
+                    <h3 class="text-2xl font-normal mb-4 text-[#2D2928]">Mitt första spel</h3>
+                    <p class="text-[#8A817C] text-sm leading-relaxed mb-8 font-light">
+                        Här kan du skriva en kort beskrivning om ditt första spelprojekt, vad det handlar om och vad du har lärt dig under utvecklingen.
+                    </p>
+                    <a href="spel1.html" class="inline-block text-[10px] font-bold uppercase tracking-[0.3em] text-[#D4AF37] hover:text-[#2D2928] transition-colors pb-2 border-b border-transparent hover:border-[#2D2928]">
+                        Upptäck spelet
+                    </a>
+                </div>
+
+                <!-- Spel 2 -->
+                <div class="project-card p-10 rounded-sm group">
+                    <div class="bg-[#FDFCFB] aspect-[4/3] mb-10 overflow-hidden flex items-center justify-center border border-[#F4EFEA]">
+                         <span class="serif text-4xl text-[#E8D5D0] group-hover:scale-110 transition-transform duration-700">02</span>
+                    </div>
+                    <h3 class="text-2xl font-normal mb-4 text-[#2D2928]">Mitt andra spel</h3>
+                    <p class="text-[#8A817C] text-sm leading-relaxed mb-8 font-light">
+                        Här kan du skriva om ditt andra spelprojekt. Berätta gärna om spelidén och hur man spelar det.
+                    </p>
+                    <a href="spel2.html" class="inline-block text-[10px] font-bold uppercase tracking-[0.3em] text-[#D4AF37] hover:text-[#2D2928] transition-colors pb-2 border-b border-transparent hover:border-[#2D2928]">
+                        Upptäck spelet
+                    </a>
+                </div>
             </div>
         </section>
 
         <!-- Gymnasiearbete Section -->
-        <section id="gymnasiearbete" class="scroll-mt-20">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="order-2 md:order-1">
-                    <span class="text-orange-500 font-bold tracking-widest uppercase text-xs">Slutprojekt</span>
-                    <h3 class="text-4xl font-black mt-2 mb-6 uppercase">Gymnasiearbete</h3>
-                    <p class="text-gray-600 mb-8 leading-relaxed italic border-l-4 border-orange-500 pl-4">
-                        Här hittar du detaljerad information om mitt gymnasiearbete inom Försäljning och service.
+        <section id="gymnasiearbete" class="py-24 border-t border-[#E8D5D0]/40 scroll-mt-20">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2 class="text-4xl font-normal text-[#2D2928] mb-8 leading-tight">Gymnasiearbete</h2>
+                    <p class="text-[#6B6361] leading-relaxed mb-10 font-light">
+                        En djupdykning i framtidens handel och kundrelationer. Genom mitt gymnasiearbete utforskar jag hur personlig service kan transformeras i en digital värld.
                     </p>
-                    <a href="gymnasiearbete.html" class="inline-flex items-center px-8 py-3 bg-orange-500 text-white font-bold rounded-none hover:bg-orange-600 transition shadow-lg shadow-orange-100 uppercase tracking-wider">
-                        Visa arbete
-                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <a href="gymnasiearbete.html" class="px-10 py-4 bg-[#2D2928] text-[#F9F7F2] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#D4AF37] transition-all inline-block">
+                        Läs rapporten
                     </a>
                 </div>
-                <div class="order-1 md:order-2">
-                    <div class="bg-black aspect-video md:aspect-square flex items-center justify-center p-8">
-                        <div class="border border-gray-800 w-full h-full flex items-center justify-center">
-                            <span class="text-orange-500 font-bold uppercase tracking-widest opacity-50 text-center">Portfolio<br>2024</span>
-                        </div>
+                <div class="relative">
+                    <div class="aspect-[3/4] bg-[#E8D5D0]/20 rounded-t-full overflow-hidden flex items-center justify-center">
+                         <div class="w-full h-full border-[20px] border-white/50 absolute"></div>
+                         <span class="serif text-sm italic text-[#A3918D]">Akademisk Portfölj</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CV Section -->
-        <section id="cv" class="scroll-mt-20 bg-black text-white p-12 md:p-20 text-center">
-            <h3 class="text-4xl font-black mb-6 uppercase">Mitt CV</h3>
-            <p class="text-gray-400 mb-10 max-w-xl mx-auto">
-                Läs mer om min utbildning på Praktiska Gymnasiet och min praktiska erfarenhet.
+        <section id="cv" class="my-32 p-16 md:p-24 bg-white border border-[#E8D5D0]/30 text-center rounded-sm">
+            <h2 class="serif text-4xl text-[#2D2928] mb-6">Erfarenhet & Kompetens</h2>
+            <p class="text-[#8A817C] mb-12 max-w-md mx-auto font-light leading-relaxed">
+                Min resa genom studier och praktik har format min yrkesidentitet. Se min fullständiga profil och mina meriter.
             </p>
-            <a href="cv.html" class="inline-flex items-center px-10 py-4 border-2 border-orange-500 text-orange-500 font-black hover:bg-orange-500 hover:text-white transition group uppercase tracking-widest">
-                Öppna CV
-                <svg class="ml-3 w-5 h-5 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            <a href="cv.html" class="text-[#2D2928] text-[10px] font-bold uppercase tracking-[0.4em] border-b-2 border-[#D4AF37] pb-2 hover:text-[#D4AF37] transition-all">
+                Visa mitt fullständiga CV
             </a>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-16">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            <p class="text-gray-400 text-sm tracking-widest uppercase">© Fatima Majkoumeh | Praktiska Malmö City</p>
+    <footer class="py-16 bg-[#F4EFEA] px-8">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-[9px] font-bold uppercase tracking-[0.3em] text-[#A3918D]">
+            <p class="serif italic text-base normal-case text-[#4A4442] mb-4 md:mb-0 tracking-normal">Fatima Majkoumeh</p>
+            <div class="flex space-x-12">
+                <span>Malmö, SE</span>
+                <span>© 2024</span>
+            </div>
         </div>
     </footer>
 
