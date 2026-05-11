@@ -1,1 +1,262 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galax-konstnären</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #050505;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+        .ui-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 30, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            gap: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .tool-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tool-btn.active {
+            color: #00d2ff;
+            transform: scale(1.2);
+            text-shadow: 0 0 10px #00d2ff;
+        }
+        #instruction {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
 
+<div class="ui-overlay">
+    <h1 class="text-3xl font-light tracking-widest text-blue-400">GALAX-KONSTNÄREN</h1>
+    <p class="text-xs opacity-50 uppercase mt-1">Skapa balans i kosmos</p>
+    <div class="mt-4 bg-white/5 p-3 rounded-lg border border-white/10">
+        <p>Himlakroppar: <span id="body-count" class="text-blue-300 font-bold">0</span></p>
+        <p>Energi: <span id="energy-val" class="text-purple-400 font-bold">100%</span></p>
+    </div>
+</div>
+
+<div id="instruction">
+    <p class="text-2xl font-thin mb-2">Klicka och dra för att skjuta ut en planet</p>
+    <p class="text-sm opacity-50 italic">Håll längre för större massa</p>
+</div>
+
+<div class="controls pointer-events-auto">
+    <button onclick="setTool('planet')" id="btn-planet" class="tool-btn active" title="Planeter">🪐</button>
+    <button onclick="setTool('star')" id="btn-star" class="tool-btn" title="Stjärnor">☀️</button>
+    <button onclick="clearCanvas()" class="tool-btn" title="Rensa allt">🗑️</button>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const bodyCountEl = document.getElementById('body-count');
+
+    let bodies = [];
+    let isDragging = false;
+    let startX, startY;
+    let currentX, currentY;
+    let currentTool = 'planet';
+    const G = 0.5; // Gravitationskonstant
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function setTool(tool) {
+        currentTool = tool;
+        document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + tool).classList.add('active');
+    }
+
+    function clearCanvas() {
+        bodies = [];
+        updateUI();
+    }
+
+    class CelestialBody {
+        constructor(x, y, vx, vy, mass, color) {
+            this.x = x;
+            this.y = y;
+            this.vx = vx;
+            this.vy = vy;
+            this.mass = mass;
+            this.radius = Math.sqrt(mass) * 2;
+            this.color = color;
+            this.trail = [];
+        }
+
+        update() {
+            // Gravitation mot alla andra kroppar
+            bodies.forEach(other => {
+                if (other === this) return;
+
+                const dx = other.x - this.x;
+                const dy = other.y - this.y;
+                const distSq = dx * dx + dy * dy;
+                const dist = Math.sqrt(distSq);
+
+                if (dist < this.radius + other.radius) {
+                    // Kollision - Den större äter den mindre (förenklat)
+                    if (this.mass >= other.mass) {
+                        this.vx = (this.vx * this.mass + other.vx * other.mass) / (this.mass + other.mass);
+                        this.vy = (this.vy * this.mass + other.vy * other.mass) / (this.mass + other.mass);
+                        this.mass += other.mass;
+                        this.radius = Math.sqrt(this.mass) * 2;
+                        other.toRemove = true;
+                    }
+                    return;
+                }
+
+                const force = (G * this.mass * other.mass) / distSq;
+                const ax = (force * dx) / (dist * this.mass);
+                const ay = (force * dy) / (dist * this.mass);
+
+                this.vx += ax;
+                this.vy += ay;
+            });
+
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Spara spår
+            this.trail.push({x: this.x, y: this.y});
+            if (this.trail.length > 50) this.trail.shift();
+        }
+
+        draw() {
+            // Rita spår
+            if (this.trail.length > 1) {
+                ctx.beginPath();
+                ctx.strokeStyle = this.color;
+                ctx.globalAlpha = 0.2;
+                ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                for(let i=1; i<this.trail.length; i++) {
+                    ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                }
+                ctx.stroke();
+            }
+
+            // Rita kropp
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = this.radius * 2;
+            ctx.shadowColor = this.color;
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        currentX = startX;
+        currentY = startY;
+        document.getElementById('instruction').style.opacity = 0;
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            currentX = e.clientX;
+            currentY = e.clientY;
+        }
+    });
+
+    canvas.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        
+        const dx = startX - e.clientX;
+        const dy = startY - e.clientY;
+        const vx = dx * 0.05;
+        const vy = dy * 0.05;
+        
+        const mass = currentTool === 'star' ? 200 + Math.random() * 300 : 10 + Math.random() * 40;
+        const color = currentTool === 'star' ? '#ffd700' : `hsl(${Math.random() * 360}, 70%, 60%)`;
+
+        bodies.push(new CelestialBody(startX, startY, vx, vy, mass, color));
+        isDragging = false;
+        updateUI();
+    });
+
+    function updateUI() {
+        bodyCountEl.innerText = bodies.length;
+    }
+
+    function animate() {
+        ctx.fillStyle = 'rgba(5, 5, 10, 0.2)'; // Motion blur effekt
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Stjärnbakgrund (glimrande prickar)
+        if (Math.random() > 0.9) {
+            ctx.fillStyle = "white";
+            ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1, 1);
+        }
+
+        bodies = bodies.filter(b => !b.toRemove);
+        bodies.forEach(b => {
+            b.update();
+            b.draw();
+        });
+
+        if (isDragging) {
+            // Rita skott-linje
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(255,255,255,0.5)";
+            ctx.setLineDash([5, 5]);
+            ctx.moveTo(startX, startY);
+            ctx.lineTo(currentX, currentY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+</body>
+</html>
