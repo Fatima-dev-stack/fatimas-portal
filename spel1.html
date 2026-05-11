@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaotiska Kocken</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #fef3c7;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to bottom, #7dd3fc, #fef3c7);
+        }
+        #player {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5rem;
+            transition: left 0.1s ease-out;
+            z-index: 10;
+            user-select: none;
+        }
+        .item {
+            position: absolute;
+            font-size: 3rem;
+            user-select: none;
+        }
+        .score-board {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 3px solid #f59e0b;
+        }
+    </style>
+</head>
+<body>
 
+<div id="game-container">
+    <div class="score-board">
+        <h1 class="text-2xl font-bold text-orange-600 uppercase">Kock-Kaos 👨‍🍳</h1>
+        <p class="text-lg">Poäng: <span id="score" class="font-bold">0</span></p>
+        <p class="text-lg">Hälsa: <span id="health" class="font-bold text-green-600">❤️❤️❤️</span></p>
+    </div>
+
+    <div id="player">👨‍🍳</div>
+
+    <div id="start-screen" class="absolute inset-0 flex items-center justify-center bg-black/60 z-50">
+        <div class="bg-white p-10 rounded-3xl text-center shadow-2xl border-4 border-orange-500">
+            <h2 class="text-4xl font-black mb-4">Middagstid! 🍕</h2>
+            <p class="mb-6 text-gray-600 font-medium">Fånga maten i din gryta.<br>Undvik bomber och skräp!</p>
+            <button onclick="startGame()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-10 rounded-full text-2xl transition-transform hover:scale-110">
+                BÖRJA LAGA MAT
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let score = 0;
+    let health = 3;
+    let gameActive = false;
+    const player = document.getElementById('player');
+    const container = document.getElementById('game-container');
+    const scoreDisplay = document.getElementById('score');
+    const healthDisplay = document.getElementById('health');
+
+    // Hantera spelarens rörelse
+    window.addEventListener('mousemove', (e) => {
+        if (!gameActive) return;
+        let x = e.clientX;
+        // Håll spelaren inom skärmen
+        x = Math.max(50, Math.min(window.innerWidth - 50, x));
+        player.style.left = x + 'px';
+    });
+
+    // Touch-stöd för mobiler
+    window.addEventListener('touchmove', (e) => {
+        if (!gameActive) return;
+        let x = e.touches[0].clientX;
+        x = Math.max(50, Math.min(window.innerWidth - 50, x));
+        player.style.left = x + 'px';
+    });
+
+    function startGame() {
+        document.getElementById('start-screen').style.display = 'none';
+        gameActive = true;
+        score = 0;
+        health = 3;
+        updateUI();
+        gameLoop();
+    }
+
+    function createItem() {
+        if (!gameActive) return;
+
+        const item = document.createElement('div');
+        item.className = 'item';
+        
+        const types = [
+            { char: '🍕', type: 'good', points: 10 },
+            { char: '🍅', type: 'good', points: 5 },
+            { char: '🥩', type: 'good', points: 15 },
+            { char: '🥦', type: 'good', points: 5 },
+            { char: '💣', type: 'bad', points: 0 },
+            { char: '💩', type: 'bad', points: 0 },
+            { char: '🌶️', type: 'powerup', points: 20 }
+        ];
+
+        const config = types[Math.floor(Math.random() * types.length)];
+        item.innerText = config.char;
+        item.dataset.type = config.type;
+        item.dataset.points = config.points;
+
+        item.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+        item.style.top = '-50px';
+        container.appendChild(item);
+
+        let top = -50;
+        const speed = 3 + (score / 100);
+
+        const fallInterval = setInterval(() => {
+            if (!gameActive) {
+                clearInterval(fallInterval);
+                item.remove();
+                return;
+            }
+
+            top += speed;
+            item.style.top = top + 'px';
+
+            // Kolla krock med spelaren
+            const pRect = player.getBoundingClientRect();
+            const iRect = item.getBoundingClientRect();
+
+            if (
+                iRect.bottom > pRect.top &&
+                iRect.left < pRect.right &&
+                iRect.right > pRect.left &&
+                iRect.top < pRect.bottom
+            ) {
+                handleCollision(config);
+                item.remove();
+                clearInterval(fallInterval);
+            }
+
+            // Om den hamnar utanför skärmen
+            if (top > window.innerHeight) {
+                item.remove();
+                clearInterval(fallInterval);
+            }
+        }, 20);
+    }
+
+    function handleCollision(item) {
+        if (item.type === 'good') {
+            score += item.points;
+            createParticle(player.offsetLeft, player.offsetTop, '✨');
+        } else if (item.type === 'bad') {
+            health--;
+            createParticle(player.offsetLeft, player.offsetTop, '💥');
+            if (health <= 0) gameOver();
+        } else if (item.type === 'powerup') {
+            score += item.points;
+            player.style.fontSize = '7rem';
+            setTimeout(() => player.style.fontSize = '5rem', 2000);
+            createParticle(player.offsetLeft, player.offsetTop, '🔥');
+        }
+        updateUI();
+    }
+
+    function createParticle(x, y, char) {
+        const p = document.createElement('div');
+        p.innerText = char;
+        p.style.position = 'absolute';
+        p.style.left = x + 'px';
+        p.style.top = y + 'px';
+        p.style.fontSize = '2rem';
+        p.style.transition = 'all 0.5s ease-out';
+        p.style.pointerEvents = 'none';
+        container.appendChild(p);
+
+        setTimeout(() => {
+            p.style.transform = 'translateY(-100px) scale(2)';
+            p.style.opacity = '0';
+            setTimeout(() => p.remove(), 500);
+        }, 10);
+    }
+
+    function updateUI() {
+        scoreDisplay.innerText = score;
+        healthDisplay.innerText = '❤️'.repeat(health);
+    }
+
+    function gameLoop() {
+        if (!gameActive) return;
+        createItem();
+        setTimeout(gameLoop, Math.max(300, 1000 - (score / 10)));
+    }
+
+    function gameOver() {
+        gameActive = false;
+        const finalScore = score;
+        setTimeout(() => {
+            alert("SLUT PÅ MATEN! Din poäng: " + finalScore);
+            location.reload();
+        }, 100);
+    }
+</script>
+
+</body>
+</html>
